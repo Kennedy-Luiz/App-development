@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
@@ -43,6 +45,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.kennedy.aspire.ui.theme.newYellow
 import com.kennedy.aspire.R
 
@@ -50,7 +54,7 @@ import com.kennedy.aspire.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemScreen(){
+fun ItemScreen(navController: NavController){
 
     Column (
         modifier = Modifier.fillMaxSize()
@@ -130,7 +134,49 @@ fun ItemScreen(){
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        //Row
+
+        Column (
+            modifier = Modifier.verticalScroll( rememberScrollState())
+        ){
+            Row (
+                modifier = Modifier.padding(start =20.dp)
+            ){
+                Image(
+                    painter = painterResource(R.drawable.img),
+                    contentDescription = "commerce",
+                    modifier = Modifier.size(width = 200.dp, height = 200.dp).clip(shape = RoundedCornerShape(40.dp))
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Column(){
+                    Text(text = "Stylish Cars", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(text = "Brand name:Land Cruiser V8", fontSize =15.sp)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(text = "Price: Ksh 25000000", fontSize = 15.sp, textDecoration = TextDecoration.LineThrough)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(text = "Now: Ksh 20000000", fontSize = 15.sp)
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Row (){
+                        Icon(imageVector = Icons.Default.Star, contentDescription = "", tint = Color.Yellow)
+                        Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Yellow)
+                        Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Yellow)
+                        Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Yellow)
+                        Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Black)
+                    }
+
+                    Button(onClick = {},
+                    ) {
+                        Text(text = "Buy Now...")
+                    }
+        }
+
+            }
+        }
+
+        //End of Raw
+        Spacer(modifier = Modifier.height(10.dp))
         Row (
             modifier = Modifier.padding(start =20.dp)
         ){
@@ -142,7 +188,7 @@ fun ItemScreen(){
             Spacer(modifier = Modifier.height(10.dp))
 
             Column(){
-                Text(text = "Stylish Cars", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = "Mercedez Benz", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = "Brand name:Land Cruiser V8", fontSize =15.sp)
                 Spacer(modifier = Modifier.height(10.dp))
@@ -151,7 +197,7 @@ fun ItemScreen(){
                 Text(text = "Now: Ksh 20000000", fontSize = 15.sp)
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Row (){ 
+                Row (){
                     Icon(imageVector = Icons.Default.Star, contentDescription = "", tint = Color.Yellow)
                     Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Yellow)
                     Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Yellow)
@@ -166,13 +212,11 @@ fun ItemScreen(){
 
             }
         }
-
-        //End of Raw
     }
 
 }
 @Preview(showBackground =true)
 @Composable
 fun ItemScreenPreview(){
-    ItemScreen()
+    ItemScreen(rememberNavController())
 }

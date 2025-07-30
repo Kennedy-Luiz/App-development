@@ -28,12 +28,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.kennedy.aspire.R
+import com.kennedy.aspire.navigation.ROUTE_ITEM
 import com.kennedy.aspire.ui.theme.newYellow
 import com.kennedy.aspire.ui.theme.newYellow11
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(navController: NavController){
 
     Column(
         modifier = Modifier
@@ -80,7 +83,9 @@ fun HomeScreen(){
         Spacer(modifier = Modifier.height(10.dp))
 
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(ROUTE_ITEM)
+            },
             colors = ButtonDefaults.buttonColors(Color.Blue),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
@@ -95,5 +100,5 @@ fun HomeScreen(){
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
-    HomeScreen()
+    HomeScreen(rememberNavController())
 }
