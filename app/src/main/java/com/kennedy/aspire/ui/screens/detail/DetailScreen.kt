@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.kennedy.aspire.R
+import com.kennedy.aspire.navigation.ROUTE_INTENT
 import com.kennedy.aspire.navigation.ROUTE_ITEM
 import com.kennedy.aspire.ui.theme.newYellow
 import com.kennedy.aspire.ui.theme.Pink40
@@ -145,7 +146,9 @@ fun DetailScreen(navController: NavController){
         //FloatingActionButton
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* Add action */ },
+                onClick = {
+                    navController.navigate(ROUTE_INTENT)
+                },
                 containerColor = Color.LightGray
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")

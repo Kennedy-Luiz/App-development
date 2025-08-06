@@ -2,16 +2,24 @@ package com.kennedy.aspire.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.kennedy.aspire.data.UserDatabase
+import com.kennedy.aspire.repository.UserRepository
 import com.kennedy.aspire.ui.screens.about.AboutScreen
 import com.kennedy.aspire.ui.screens.contact.ContactScreen
+import com.kennedy.aspire.ui.screens.dashboard.DashBoardScreen
+import com.kennedy.aspire.ui.screens.form.FormScreen
 import com.kennedy.aspire.ui.screens.home.HomeScreen
+import com.kennedy.aspire.ui.screens.intent.IntentScreen
 import com.kennedy.aspire.ui.screens.item.ItemScreen
 import com.kennedy.aspire.ui.screens.scafold.ScafoldScreen
 import com.kennedy.aspire.ui.screens.splash.SplashScreen
+import com.kennedy.aspire.viewmodel.AuthViewModel
+
 
 @Composable
 fun AppNavHost(
@@ -20,6 +28,7 @@ fun AppNavHost(
     startDestination: String = ROUTE_SPLASH
 ) {
 
+    val context = LocalContext.current
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -43,6 +52,40 @@ fun AppNavHost(
         composable(ROUTE_SCAFOLD) {
             ScafoldScreen(navController)
         }
+
+        composable(ROUTE_INTENT) {
+            IntentScreen(navController)
+        }
+        composable(ROUTE_DASHBOARD) {
+            DashBoardScreen(navController)
+        }
+        composable(ROUTE_FORM) {
+            FormScreen(navController)
+        }
+
+
+        //AUTHENTICATION
+
+        // Initialize Room Database and Repository for Authentication
+        val appDatabase = UserDatabase.getDatabase(context)
+        val authRepository = UserRepository(appDatabase.userDao())
+        val authViewModel: AuthViewModel = AuthViewModel(authRepository)
+        composable(ROUTE_REGISTER) {
+            RegisterScreen(authViewModel, navController) {
+                navController.navigate(ROUTE_LOGIN) {
+                    popUpTo(ROUTE_REGISTER) { inclusive = true }
+                }
+            }
+        }
+
+        composable(ROUTE_LOGIN) {
+            LoginScreen(authViewModel, navController) {
+                navController.navigate(ROUTE_HOME) {
+                    popUpTo(ROUTE_LOGIN) { inclusive = true }
+                }
+            }
+        }
+
 
 
 

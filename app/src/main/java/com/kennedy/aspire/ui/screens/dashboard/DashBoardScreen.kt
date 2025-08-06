@@ -1,11 +1,10 @@
-package com.kennedy.aspire.ui.screens.scafold
-
-
+package com.kennedy.aspire.ui.screens.dashboard
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -14,6 +13,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,29 +39,13 @@ import com.kennedy.aspire.ui.theme.newYellow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScafoldScreen(navController: NavController){
-
-
-    //Scaffold
+fun DashBoardScreen(navController: NavController){
 
     var selectedIndex by remember { mutableStateOf(0) }
-
     Scaffold(
         //TopBar
         topBar = {
-            TopAppBar(
-                title = { Text("Item Screen") },
-                navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray,
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
-                )
-            )
+
         },
 
         //BottomBar
@@ -101,11 +85,14 @@ fun ScafoldScreen(navController: NavController){
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { /* Add action */ },
-                containerColor = Color.LightGray
+                containerColor = Color.LightGray,
+                modifier = Modifier.offset(y = 40.dp)
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
             }
         },
+        floatingActionButtonPosition = FabPosition.Center,
+        //Contents
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -130,6 +117,6 @@ fun ScafoldScreen(navController: NavController){
 }
 @Preview
 @Composable
-fun ScafoldScreenPreview(){
-    ScafoldScreen(rememberNavController())
+fun DashBoardScreenPreview(){
+    DashBoardScreen(rememberNavController())
 }

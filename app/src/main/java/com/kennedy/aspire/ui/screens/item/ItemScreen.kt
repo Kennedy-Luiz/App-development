@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -38,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,12 +51,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.kennedy.aspire.ui.theme.newYellow
 import com.kennedy.aspire.R
-
+import com.kennedy.aspire.navigation.ROUTE_CATEGORY
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemScreen(navController: NavController){
+    val mContext = LocalContext.current
 
     Column (
         modifier = Modifier.fillMaxSize()
@@ -89,10 +92,12 @@ fun ItemScreen(navController: NavController){
                         contentDescription = "notifications"
                     )
                 }
-                IconButton(onClick = {}) {
+                IconButton(onClick = {
+                    navController.navigate(ROUTE_CATEGORY)
+                }) {
                     Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = "notifications"
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "ARROW"
                     )
                 }
             }
@@ -166,7 +171,9 @@ fun ItemScreen(navController: NavController){
                         Icon(imageVector = Icons.Default.Star, contentDescription ="", tint=Color.Black)
                     }
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        navController.navigate(ROUTE_CATEGORY)
+                    },
                     ) {
                         Text(text = "Buy Now...")
                     }
