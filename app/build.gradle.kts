@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.kennedy.aspire"
-    compileSdk = 36
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.kennedy.aspire"
-        minSdk = 21
-        targetSdk = 36
+        minSdk = 29
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -75,5 +75,10 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     //End
 
+    // Image Loading (Coil for Jetpack Compose)
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    //Livedata
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
 
 }
